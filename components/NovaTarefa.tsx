@@ -1,26 +1,36 @@
 "use client";
-
 import { useState } from "react";
 
-export default function NovaTarefa() {
-  const [titulo, setTitulo] = useState("");
+interface NovaTarefaProps {
+  onAdd?: (titulo: string) => void;
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!titulo.trim()) return;
-    alert(`Tarefa adicionada: ${titulo}`);
-    setTitulo("");
-  };
+export default function NovaTarefa({ onAdd }: NovaTarefaProps) {
+  const [tarefa, setTarefa] = useState("");
+
+  function adicionarTarefa() {
+    if (!tarefa.trim()) {
+      alert("Digite uma tarefa!");
+      return;
+    }
+
+    onAdd?.(tarefa); // ✅ chama a função do Page
+    alert("Tarefa adicionada com sucesso!");
+    setTarefa("");
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <input
         type="text"
-        value={titulo}
-        onChange={(e) => setTitulo(e.target.value)}
-        placeholder="Nova tarefa"
+        placeholder="Digite uma nova tarefa"
+        value={tarefa}
+        onChange={(e) => setTarefa(e.target.value)}
+        className="border rounded p-2 mr-2"
       />
-      <button type="submit">Adicionar</button>
-    </form>
+      <button onClick={adicionarTarefa} className="bg-blue-500 text-white p-2 rounded">
+        Adicionar
+      </button>
+    </div>
   );
 }
