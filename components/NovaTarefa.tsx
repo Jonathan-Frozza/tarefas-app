@@ -23,7 +23,7 @@ export default function NovaTarefa({ onAdd }: NovaTarefaProps) {
     <div>
       <input
         type="text"
-        placeholder="Digite uma nova tarefa"
+        placeholder="Nova tarefa"
         value={tarefa}
         onChange={(e) => setTarefa(e.target.value)}
         className="border rounded p-2 mr-2"

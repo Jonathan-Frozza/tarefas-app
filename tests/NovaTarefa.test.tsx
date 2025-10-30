@@ -1,6 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import NovaTarefa from "../components/NovaTarefa";
 
+beforeAll(() => {
+  window.alert = jest.fn();
+});
+
 describe("NovaTarefa", () => {
   it("renderiza input e botão", () => {
     render(<NovaTarefa />);
